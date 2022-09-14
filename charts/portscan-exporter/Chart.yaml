@@ -1,0 +1,20 @@
+annotations:
+  category: Metrics
+apiVersion: v2
+appVersion: 1.0.0
+description: Port-Scanner is prometheus exporter and portscannig solution
+engine: gotpl
+home: https://github.com/nce/xxx
+keywords:
+  - go
+  - exporter
+  - metrics
+  - port-scanner
+maintainers:
+  - name: nce
+    email: 770135+nce@users.noreply.github.com
+    url: https://github.com/nce
+name: portscan-exporter
+sources:
+  - https://github.con/nce/xxx
+version: 0.1.0

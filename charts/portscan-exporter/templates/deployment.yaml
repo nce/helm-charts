@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "portscan.fullname" . }}
+  namespace: {{ include "portscan.namespace" . | quote }}
+  labels: {{- include "portscan.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ template "portscan.fullname" . }}
+  {{- with .Values.portscan.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.portscan.replicaCount }}
+  {{- end }}
+  {{- if .Values.portscan.updateStrategy }}
+  strategy: {{- toYaml .Values.portscan.updateStrategy | nindent 4 }}
+  {{- end }}
+  selector:
+    matchLabels: {{- include "portscan.matchLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ template "portscan.fullname" . }}
+  template:
+    metadata:
+      {{- with .Values.portscan.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels: {{- include "portscan.labels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ template "portscan.fullname" . }}
+        {{- if .Values.portscan.podLabels }}
+          {{- toYaml .Values.portscan.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- include "portscan.imagePullSecrets" . | nindent 6 }}
+      serviceAccountName: {{ template "portscan.serviceAccountName" . }}
+      {{- if .Values.portscan.hostAliases }}
+      hostAliases: {{- include "portscan.render" (dict "value" .Values.portscan.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.portscan.affinity }}
+      affinity: {{- include "portscan.render" ( dict "value" .Values.portscan.affinity "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.portscan.nodeSelector }}
+      nodeSelector: {{- include "portscan.render" ( dict "value" .Values.portscan.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.portscan.tolerations }}
+      tolerations: {{- include "portscan.render" (dict "value" .Values.portscan.tolerations "context" .) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.portscan.priorityClassName }}
+      priorityClassName: {{ .Values.portscan.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.portscan.schedulerName }}
+      schedulerName: {{ .Values.portscan.schedulerName | quote }}
+      {{- end }}
+      {{- if .Values.portscan.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "portscan.render" (dict "value" .Values.portscan.topologySpreadConstraints "context" .) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.portscan.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.portscan.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.portscan.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.portscan.terminationGracePeriodSeconds }}
+      {{- end }}
+      initContainers:
+        {{- if .Values.portscan.initContainers }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.portscan.initContainers "context" $) | nindent 8 }}
+        {{- end }}
+      containers:
+        - name: portscan
+          image: "{{ .Values.portscan.image.registry }}/{{ .Values.portscan.image.repository }}:{{ .Values.portscan.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.portscan.image.pullPolicy }}
+          {{- if .Values.portscan.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.portscan.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+         {{- if .Values.portscan.command }}
+          command: {{- include "portscan.render" (dict "value" .Values.portscan.command "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.portscan.args }}
+          args: {{- include "portscan.render" (dict "value" .Values.portscan.args "context" $) | nindent 12 }}
+          {{- end }}
+          env:
+            - name: foo
+              value: bar
+            {{- if .Values.portscan.extraEnvVars }}
+            {{- include "portscan.render" (dict "value" .Values.portscan.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          envFrom:
+            {{- if .Values.portscan.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "portscan.render" (dict "value" .Values.portscan.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.portscan.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "portscan.render" (dict "value" .Values.portscan.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- if .Values.portscan.resources }}
+          resources: {{- toYaml .Values.portscan.resources | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: tcp-metrics
+              containerPort: {{ .Values.portscan.containerPorts.metrics }}
+            - name: health
+              containerPort: {{ .Values.portscan.containerPorts.health }}
+          {{- if .Values.portscan.livenessProbe.enabled }}
+          livenessProbe: {{- include "portscan.render" (dict "value" (omit .Values.portscan.livenessProbe "enabled") "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.portscan.readinessProbe.enabled }}
+          readinessProbe: {{- include "portscan.render" (dict "value" (omit .Values.portscan.readinessProbe "enabled") "context" $) | nindent 12 }}
+          {{- if .Values.portscan.lifecycleHooks }}
+          lifecycle: {{- include "portscan.render" (dict "value" .Values.portscan.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
+       {{- end }}
