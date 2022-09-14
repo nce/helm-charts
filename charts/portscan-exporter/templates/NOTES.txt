@@ -1,0 +1,10 @@
+CHART NAME: {{ .Chart.Name  }}
+CHART VERSION: {{ .Chart.Version  }}
+APP VERSION: {{ .Chart.AppVersion  }}
+
+** Please be patient while the chart is being deployed **
+
+The application starts it's portscanning right away. It periodically scans
+all pods for the status of its ports.
+
+The Metrics Endpoint can be found at {{ template "portscan.fullname" . }}:{{ .Values.service.ports.metrics }}/metrics
