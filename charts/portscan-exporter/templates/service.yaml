@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "portscan.fullname" . }}
+  namespace: {{ include "portscan.namespace" . | quote }}
+  labels: {{- include "portscan.labels" . | nindent 4 }}
+    app.kubernetes.io/component: portscan
+    {{- if .Values.commonLabels }}
+    {{- include "portscan.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.service.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.service.annotations }}
+    {{- include "portscan.render" ( dict "value" .Values.service.annotations "context" $) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "portscan.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  {{- if and .Values.service.clusterIP (eq .Values.service.type "ClusterIP") }}
+  clusterIP: {{ .Values.service.clusterIP }}
+  {{- end }}
+  ports:
+    - name: metrics
+      port: {{ .Values.service.ports.metrics }}
+      protocol: "TCP"
+      {{- if and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) (not (empty .Values.service.nodePorts.http)) }}
+      nodePort: {{ .Values.service.nodePorts.http }}
+      {{- else if eq .Values.service.type "ClusterIP" }}
+      nodePort: null
+      {{- end }}
+    {{- if .Values.service.extraPorts }}
+    {{- include "portscan.render" (dict "value" .Values.service.extraPorts "context" $) | nindent 4 }}
+    {{- end }}
+  selector: {{- include "portscan.matchLabels" . | nindent 4 }}
+    app.kubernetes.io/component: portscan
