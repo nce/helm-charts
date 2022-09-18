@@ -6,7 +6,7 @@ portscan:
     repository: nce/gs-hiring-task
 
     # -- Image tag of the portscanning application
-    tag: 307f380
+    tag: 966d352
 
     # -- ImagePullSecrets; They need to be created beforehand
     # -- https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -17,13 +17,26 @@ portscan:
 
   # -- SecurityContext enforced on the container
   containerSecurityContext:
-    enabled: false
+    enabled: true
+    allowPrivilegeEscalation: false
 
   podSecurityContext:
   # -- SecurityContext enforced on the pod
     enabled: true
+    # -- Nonroot image
     runAsNonRoot: true
+    # -- Userid of the container (nobody)
+    runAsUser: 65534
 
+  resources:
+    requests:
+      # -- memory requests of the scanner
+      memory: 2Gi
+      # -- cpu requests of the scanner
+      cpu: 2
+    limits:
+      # -- memory limit of the scanner
+      memory: 3Gi
 
 #  initContainers:
 #  command:

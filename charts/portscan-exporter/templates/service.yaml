@@ -35,4 +35,4 @@ spec:
     {{- include "portscan.render" (dict "value" .Values.service.extraPorts "context" $) | nindent 4 }}
     {{- end }}
   selector: {{- include "portscan.matchLabels" . | nindent 4 }}
-    app.kubernetes.io/component: portscan
+    app.kubernetes.io/component: {{ template "portscan.fullname" . }}

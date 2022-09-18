@@ -1,4 +1,5 @@
 # portscan-exporter
+
 ![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 Port-Scanner is prometheus exporter and portscannig solution
@@ -23,18 +24,22 @@ Port-Scanner is prometheus exporter and portscannig solution
 | metrics.enabled | bool | `true` |  |
 | metrics.serviceMonitor | object | `{"annotations":{},"enabled":false,"honorLabels":false,"interval":"","jobLabel":"","labels":{},"metricRelabelings":[],"namespace":"","relabelings":[],"scrapeTimeout":"","selector":{}}` | If the kube-prometheus stack is used, configure the `serviceMonitor` |
 | portscan.containerPorts | object | `{"health":12000,"metrics":10000}` | Ports the container exposes |
-| portscan.containerSecurityContext | object | `{"enabled":false}` | SecurityContext enforced on the container |
+| portscan.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"enabled":true}` | SecurityContext enforced on the container |
 | portscan.extraEnvVars | list | `[{"name":"RATELIMIT","value":"35"},{"name":"LOGLEVEL","value":"DEBUG"}]` | Refer to xxx for ENV options (`./portscan-exporter -h`) |
 | portscan.image.pullPolicy | string | `"IfNotPresent"` | As we set the `tag` to git commits, `IfNotPresent` should be okay |
 | portscan.image.pullSecrets | list | `[]` | https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
 | portscan.image.registry | string | `"ghcr.io"` |  |
 | portscan.image.repository | string | `"nce/gs-hiring-task"` |  |
-| portscan.image.tag | string | `"307f380"` | Image tag of the portscanning application |
+| portscan.image.tag | string | `"966d352"` | Image tag of the portscanning application |
 | portscan.livenessProbe | object | `{"enabled":true,"failureThreshold":5,"httpGet":{"path":"/health","port":"health"},"initialDelaySeconds":90,"periodSeconds":120,"successThreshold":1,"timeoutSeconds":5}` | LivenessProbe configuration |
 | portscan.podSecurityContext.enabled | bool | `true` | SecurityContext enforced on the pod |
-| portscan.podSecurityContext.runAsNonRoot | bool | `true` |  |
+| portscan.podSecurityContext.runAsNonRoot | bool | `true` | Nonroot image |
+| portscan.podSecurityContext.runAsUser | int | `65534` | Userid of the container (nobody) |
 | portscan.readinessProbe | object | `{"enabled":true,"failureThreshold":3,"httpGet":{"path":"/ready","port":"health"},"initialDelaySeconds":25,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":2}` | ReadinessProbe configuration |
 | portscan.replicaCount | int | `1` | Number of replicas for the portscanner. Only set if `autoscaling.enabled=false` |
+| portscan.resources.limits.memory | string | `"3Gi"` | memory limit of the scanner |
+| portscan.resources.requests.cpu | int | `2` | cpu requests of the scanner |
+| portscan.resources.requests.memory | string | `"2Gi"` | memory requests of the scanner |
 | rbac | object | `{"create":true}` | Along the `serviceAccount` we need special ClusterRoles |
 | service | object | `{"ports":{"metrics":10000},"type":"ClusterIP"}` | Service Configuration for the endpoints |
 | service.ports | object | `{"metrics":10000}` | Portname to portnumber configuration |
