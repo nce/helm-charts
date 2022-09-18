@@ -24,6 +24,7 @@ portscan:
     enabled: true
     runAsNonRoot: true
 
+
 #  initContainers:
 #  command:
 #  args:
