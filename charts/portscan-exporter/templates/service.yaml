@@ -4,7 +4,7 @@ metadata:
   name: {{ template "portscan.fullname" . }}
   namespace: {{ include "portscan.namespace" . | quote }}
   labels: {{- include "portscan.labels" . | nindent 4 }}
-    app.kubernetes.io/component: portscan
+    app.kubernetes.io/component: {{ template "portscan.fullname" . }}
     {{- if .Values.commonLabels }}
     {{- include "portscan.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}

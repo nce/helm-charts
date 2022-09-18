@@ -19,9 +19,11 @@ portscan:
   containerSecurityContext:
     enabled: false
 
-  # -- SecurityContext enforced on the pod
   podSecurityContext:
-    enabled: false
+  # -- SecurityContext enforced on the pod
+    enabled: true
+    runAsNonRoot: true
+
 #  initContainers:
 #  command:
 #  args:
@@ -127,4 +129,4 @@ service:
   type: ClusterIP
   # -- Portname to portnumber configuration
   ports:
-    metrics: 12000
+    metrics: 10000

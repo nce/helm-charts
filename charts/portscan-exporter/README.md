@@ -1,6 +1,6 @@
 # portscan-exporter
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 Port-Scanner is prometheus exporter and portscannig solution
 
@@ -32,12 +32,13 @@ Port-Scanner is prometheus exporter and portscannig solution
 | portscan.image.repository | string | `"nce/gs-hiring-task"` |  |
 | portscan.image.tag | string | `"307f380"` | Image tag of the portscanning application |
 | portscan.livenessProbe | object | `{"enabled":true,"failureThreshold":5,"httpGet":{"path":"/health","port":"health"},"initialDelaySeconds":90,"periodSeconds":120,"successThreshold":1,"timeoutSeconds":5}` | LivenessProbe configuration |
-| portscan.podSecurityContext | object | `{"enabled":false}` | SecurityContext enforced on the pod |
+| portscan.podSecurityContext.enabled | bool | `true` | SecurityContext enforced on the pod |
+| portscan.podSecurityContext.runAsNonRoot | bool | `true` |  |
 | portscan.readinessProbe | object | `{"enabled":true,"failureThreshold":3,"httpGet":{"path":"/ready","port":"health"},"initialDelaySeconds":25,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":2}` | ReadinessProbe configuration |
 | portscan.replicaCount | int | `1` | Number of replicas for the portscanner. Only set if `autoscaling.enabled=false` |
 | rbac | object | `{"create":true}` | Along the `serviceAccount` we need special ClusterRoles |
-| service | object | `{"ports":{"metrics":12000},"type":"ClusterIP"}` | Service Configuration for the endpoints |
-| service.ports | object | `{"metrics":12000}` | Portname to portnumber configuration |
+| service | object | `{"ports":{"metrics":10000},"type":"ClusterIP"}` | Service Configuration for the endpoints |
+| service.ports | object | `{"metrics":10000}` | Portname to portnumber configuration |
 | serviceAccount | object | `{"automountServiceAccountToken":true,"create":true,"name":"portscanner"}` | A dedicated serviceAccount is best practice for the application |
 | serviceAccount.name | string | `"portscanner"` | Name of the dedicated service-account |
 
