@@ -30,7 +30,7 @@ Port-Scanner is prometheus exporter and portscannig solution
 | portscan.image.pullSecrets | list | `[]` | https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
 | portscan.image.registry | string | `"ghcr.io"` |  |
 | portscan.image.repository | string | `"nce/gs-hiring-task"` |  |
-| portscan.image.tag | string | `"966d352"` | Image tag of the portscanning application |
+| portscan.image.tag | string | `"3b6c3aa"` | Image tag of the portscanning application |
 | portscan.livenessProbe | object | `{"enabled":true,"failureThreshold":5,"httpGet":{"path":"/health","port":"health"},"initialDelaySeconds":90,"periodSeconds":120,"successThreshold":1,"timeoutSeconds":5}` | LivenessProbe configuration |
 | portscan.podSecurityContext.enabled | bool | `true` | SecurityContext enforced on the pod |
 | portscan.podSecurityContext.runAsNonRoot | bool | `true` | Nonroot image |
