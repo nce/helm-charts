@@ -6,7 +6,7 @@ portscan:
     repository: nce/gs-hiring-task
 
     # -- Image tag of the portscanning application
-    tag: 966d352
+    tag: 3b6c3aa
 
     # -- ImagePullSecrets; They need to be created beforehand
     # -- https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
