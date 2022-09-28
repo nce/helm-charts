@@ -17,4 +17,4 @@ maintainers:
 name: portscan-exporter
 sources:
   - https://github.con/nce/xxx
-version: 0.1.1
+version: 0.1.2
