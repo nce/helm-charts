@@ -16,6 +16,29 @@ entries:
       category: Metrics
     apiVersion: v2
     appVersion: 1.0.0
+    created: "2022-09-28T19:58:13.421690997Z"
+    description: Port-Scanner is prometheus exporter and portscannig solution
+    digest: daad36e0fc652d4440d6c34f5c1b0d2109f02aa2d5e17365dc878af92b9c5cea
+    home: https://github.com/nce/xxx
+    keywords:
+    - go
+    - exporter
+    - metrics
+    - port-scanner
+    maintainers:
+    - email: 770135+nce@users.noreply.github.com
+      name: nce
+      url: https://github.com/nce
+    name: portscan-exporter
+    sources:
+    - https://github.con/nce/xxx
+    urls:
+    - https://github.com/nce/helm-charts/releases/download/portscan-exporter-0.1.2/portscan-exporter-0.1.2.tgz
+    version: 0.1.2
+  - annotations:
+      category: Metrics
+    apiVersion: v2
+    appVersion: 1.0.0
     created: "2022-09-18T22:25:34.413611396Z"
     description: Port-Scanner is prometheus exporter and portscannig solution
     digest: d1d12ce5933a9587b6051c5a7f0859bc2f3a6e7a9aed363a5985d259d57344bf
@@ -57,4 +80,4 @@ entries:
     urls:
     - https://github.com/nce/helm-charts/releases/download/portscan-exporter-0.1.0/portscan-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-18T22:25:34.413631296Z"
+generated: "2022-09-28T19:58:13.421705097Z"
