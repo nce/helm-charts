@@ -1,22 +1,18 @@
-{{ if .Values.rbac.create }}
-kind: ClusterRole
+{{- if .Values.rbac.pspEnabled }}
 apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
 metadata:
-  name: {{ include "portscan.fullname" . }}
+  name: {{ template "portscan.fullname" . }}
   namespace: {{ include "portscan.namespace" . | quote }}
-  labels: {{- include "portscan.labels" . | nindent 4 }}
-    app.kubernetes.io/component: portscan
-    {{- if .Values.commonLabels }}
-    {{- include "portscan.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "portscan.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
+  labels:
+    {{- include "portscan.labels" . | nindent 4 }}
 rules:
-  - apiGroups: [""]
-    resources: ["pods"]
-    verbs: ["get", "list"]
-  {{- if .Values.rbac.rules }}
-  {{- include "portscan.render" ( dict "value" .Values.rbac.rules "context" $ ) | nindent 2 }}
-  {{- end }}
+  - apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
+    resourceNames:
+      - {{ template "portscan.fullname" . }}
 {{- end }}
