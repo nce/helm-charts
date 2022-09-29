@@ -14,5 +14,5 @@ rules:
     verbs:
       - use
     resourceNames:
-      - {{ tempplate "portscan.fullname" . }}
+      - {{ template "portscan.fullname" . }}
 {{- end }}
