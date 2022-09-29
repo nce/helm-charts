@@ -25,7 +25,7 @@ Port-Scanner is prometheus exporter and portscannig solution
 | metrics.serviceMonitor | object | `{"annotations":{},"enabled":false,"honorLabels":false,"interval":"","jobLabel":"","labels":{},"metricRelabelings":[],"namespace":"","relabelings":[],"scrapeTimeout":"","selector":{}}` | If the kube-prometheus stack is used, configure the `serviceMonitor` |
 | portscan.containerPorts | object | `{"health":12000,"metrics":10000}` | Ports the container exposes |
 | portscan.containerSecurityContext | object | `{"allowPrivilegeEscalation":false,"enabled":true}` | SecurityContext enforced on the container |
-| portscan.extraEnvVars | list | `[{"name":"RATELIMIT","value":"35"},{"name":"LOGLEVEL","value":"DEBUG"}]` | Refer to xxx for ENV options (`./portscan-exporter -h`) |
+| portscan.extraEnvVars | list | `[{"name":"RATELIMIT","value":"70"},{"name":"LOGLEVEL","value":"DEBUG"}]` | Refer to xxx for ENV options (`./portscan-exporter -h`) |
 | portscan.image.pullPolicy | string | `"IfNotPresent"` | As we set the `tag` to git commits, `IfNotPresent` should be okay |
 | portscan.image.pullSecrets | list | `[]` | https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
 | portscan.image.registry | string | `"ghcr.io"` |  |
@@ -40,7 +40,8 @@ Port-Scanner is prometheus exporter and portscannig solution
 | portscan.resources.limits.memory | string | `"3Gi"` | memory limit of the scanner |
 | portscan.resources.requests.cpu | int | `2` | cpu requests of the scanner |
 | portscan.resources.requests.memory | string | `"2Gi"` | memory requests of the scanner |
-| rbac | object | `{"create":true}` | Along the `serviceAccount` we need special ClusterRoles |
+| rbac.create | bool | `true` | Along the `serviceAccount` we need special ClusterRoles |
+| rbac.pspEnabled | bool | `true` | Using PSPs creates Role/Rolebindings |
 | service | object | `{"ports":{"metrics":10000},"type":"ClusterIP"}` | Service Configuration for the endpoints |
 | service.ports | object | `{"metrics":10000}` | Portname to portnumber configuration |
 | serviceAccount | object | `{"automountServiceAccountToken":true,"create":true,"name":"portscanner"}` | A dedicated serviceAccount is best practice for the application |

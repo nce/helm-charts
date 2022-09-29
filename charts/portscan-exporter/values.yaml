@@ -46,7 +46,7 @@ portscan:
   # -- Refer to xxx for ENV options (`./portscan-exporter -h`)
   extraEnvVars:
     - name: RATELIMIT
-      value: "35"
+      value: "70"
     - name: LOGLEVEL
       value: "DEBUG"
 
@@ -134,9 +134,11 @@ metrics:
     ##
     selector: {}
 
-# -- Along the `serviceAccount` we need special ClusterRoles
 rbac:
+  # -- Along the `serviceAccount` we need special ClusterRoles
   create: true
+  # -- Using PSPs creates Role/Rolebindings
+  pspEnabled: true
 
 # -- Service Configuration for the endpoints
 service:

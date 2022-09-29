@@ -1,0 +1,16 @@
+{{- if .Values.rbac.pspEnabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ template "portscan.fullname" . }}
+  labels:
+    {{- include "portscan.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ template "portscan.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "portscan.serviceAccountName" . }}
+    namespace: {{ include "portscan.namespace" . | quote }}
+{{- end }}

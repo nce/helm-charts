@@ -1,0 +1,32 @@
+{{- if .Values.rbac.pspEnabled }}
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: {{ template "portscan.fullname" . }}
+  labels:
+    {{- include "portscan.labels" . | nindent 4 }}
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  volumes: []
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: 'MustRunAsNonRoot'
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'MustRunAs'
+    ranges:
+      - min: 65534
+        max: 65534
+  fsGroup:
+    rule: 'MustRunAs'
+    ranges:
+      - min: 65534
+        max: 65534
+  readOnlyRootFilesystem: true
+  requiredDropCapabilities:
+    - ALL
+{{- end }}
