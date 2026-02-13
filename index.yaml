@@ -11,6 +11,17 @@ entries:
     urls:
     - https://github.com/nce/helm-charts/releases/download/foo-0.1.0/foo-0.1.0.tgz
     version: 0.1.0
+  klustered:
+  - apiVersion: v2
+    appVersion: v1
+    created: "2026-02-13T15:30:56.446858798Z"
+    description: A Helm chart for Kubernetes
+    digest: 2ebb27f49fa554838bca11c34aa91682af3d3fa3a07d0c811d9930ee393acf0b
+    name: klustered
+    type: application
+    urls:
+    - https://github.com/nce/helm-charts/releases/download/klustered-0.1.1/klustered-0.1.1.tgz
+    version: 0.1.1
   portscan-exporter:
   - annotations:
       category: Metrics
@@ -103,4 +114,4 @@ entries:
     urls:
     - https://github.com/nce/helm-charts/releases/download/portscan-exporter-0.1.0/portscan-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-29T07:24:05.499777697Z"
+generated: "2026-02-13T15:30:56.44687558Z"
