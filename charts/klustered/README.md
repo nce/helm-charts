@@ -4,6 +4,12 @@
 
 A Helm chart for Kubernetes
 
+**Homepage:** <https://github.com/nce/klustered>
+
+## Source Code
+
+* <https://github.com/nce/klustered>
+
 ## Values
 
 | Key | Type | Default | Description |
