@@ -38,7 +38,7 @@ A Helm chart for Kubernetes
 | replicaCount | int | `1` |  |
 | resources.limits.cpu | string | `"50m"` |  |
 | resources.limits.memory | string | `"64Mi"` |  |
-| resources.requests.cpu | string | `"200m"` |  |
+| resources.requests.cpu | string | `"20m"` |  |
 | resources.requests.memory | string | `"32Mi"` |  |
 | securityContext | object | `{}` |  |
 | service.nodePort | int | `32000` |  |
