@@ -1,8 +1,20 @@
 # klustered
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1](https://img.shields.io/badge/AppVersion-v1-informational?style=flat-square)
+![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1](https://img.shields.io/badge/AppVersion-v1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
+
+**Homepage:** <https://github.com/nce/klustered>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| nce | <770135+nce@users.noreply.github.com> | <https://github.com/nce> |
+
+## Source Code
+
+* <https://github.com/nce/klustered>
 
 ## Values
 
@@ -38,7 +50,7 @@ A Helm chart for Kubernetes
 | replicaCount | int | `1` |  |
 | resources.limits.cpu | string | `"50m"` |  |
 | resources.limits.memory | string | `"64Mi"` |  |
-| resources.requests.cpu | string | `"200m"` |  |
+| resources.requests.cpu | string | `"20m"` |  |
 | resources.requests.memory | string | `"32Mi"` |  |
 | securityContext | object | `{}` |  |
 | service.nodePort | int | `32000` |  |
