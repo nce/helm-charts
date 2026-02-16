@@ -6,6 +6,12 @@ A Helm chart for Kubernetes
 
 **Homepage:** <https://github.com/nce/klustered>
 
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| nce | <770135+nce@users.noreply.github.com> | <https://github.com/nce> |
+
 ## Source Code
 
 * <https://github.com/nce/klustered>

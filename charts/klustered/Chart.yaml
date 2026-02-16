@@ -8,3 +8,14 @@ sources:
 
 version: 0.1.2
 appVersion: "v1"
+
+maintainers:
+  - name: nce
+    email: 770135+nce@users.noreply.github.com
+    url: https://github.com/nce
+
+keywords:
+  - go
+  - broken-kubernetes
+  - challenge
+  - klustered
