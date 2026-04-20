@@ -9,7 +9,7 @@
   "timezone": "Europe/Berlin",
   "schedule": [
     "* 0-4 * * 1"
-  ]
+  ],
   "packageRules": [
     {
       "description": "Group all Helm chart dependency updates",
