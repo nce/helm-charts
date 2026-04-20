@@ -2,20 +2,26 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    ":semanticCommits",
-    "docker:disable"
   ],
+  "semanticCommits": "enabled",
+  "labels": ["dependencies"],
   "groupName": "all",
   "timezone": "Europe/Berlin",
   "schedule": [
-    "before 3am on Monday"
-  ],
+    "* 0-4 * * 1"
+  ]
   "packageRules": [
     {
-      "matchCategories": [
-        "docker"
-      ],
-      "enabled": false
+      "description": "Group all Helm chart dependency updates",
+      "matchManagers": ["helmv3"],
+      "groupName": "helm dependencies",
+      "groupSlug": "helm-deps"
+    },
+    {
+      "description": "Group Docker image updates from values.yaml",
+      "matchManagers": ["helm-values"],
+      "groupName": "container images",
+      "groupSlug": "container-images"
     }
   ]
 }
