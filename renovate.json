@@ -5,6 +5,7 @@
   ],
   "semanticCommits": "enabled",
   "labels": ["dependencies"],
+  "dependencyDashboard": true,
   "groupName": "all",
   "timezone": "Europe/Berlin",
   "schedule": [
