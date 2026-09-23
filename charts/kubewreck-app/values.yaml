@@ -90,6 +90,13 @@ httpRoute:
   hostnames:
   - kubewreck-app-test.sandbox.opdt.aws.cloud.arbeitsagentur.de
 
+  # HTTPRoute rules.
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+
   #   filters:
   #   - type: RequestHeaderModifier
   #     requestHeaderModifier:
