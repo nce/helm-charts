@@ -89,7 +89,7 @@ httpRoute:
     # namespace: default
   # Hostnames matching HTTP header.
   hostnames:
-  - klustered-app-test.sandbox.opdt.aws.cloud.arbeitsagentur.de
+  - kubewreck-app-test.sandbox.opdt.aws.cloud.arbeitsagentur.de
 
   #   filters:
   #   - type: RequestHeaderModifier
