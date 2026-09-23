@@ -84,9 +84,8 @@ httpRoute:
   annotations: {}
   # Which Gateways this Route is attached to.
   parentRefs:
-  - name: istio
-    sectionName: http
-    # namespace: default
+  - name: ingress
+    namespace: istio-ingress
   # Hostnames matching HTTP header.
   hostnames:
   - kubewreck-app-test.sandbox.opdt.aws.cloud.arbeitsagentur.de
