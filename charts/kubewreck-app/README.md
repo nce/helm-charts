@@ -26,7 +26,7 @@ A Helm chart for Kubernetes
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | fullnameOverride | string | `""` |  |
-| httpRoute | object | `{"annotations":{},"enabled":false,"hostnames":["chart-example.local"],"parentRefs":[{"name":"gateway","sectionName":"http"}],"rules":[{"matches":[{"path":{"type":"PathPrefix","value":"/headers"}}]}]}` | Expose the service via gateway-api HTTPRoute Requires Gateway API resources and suitable controller installed within the cluster (see: https://gateway-api.sigs.k8s.io/guides/) |
+| httpRoute | object | `{"annotations":{},"enabled":true,"hostnames":["klustered-app-test.sandbox.opdt.aws.cloud.arbeitsagentur.de"],"parentRefs":[{"name":"istio","sectionName":"http"}]}` | Expose the service via gateway-api HTTPRoute Requires Gateway API resources and suitable controller installed within the cluster (see: https://gateway-api.sigs.k8s.io/guides/) |
 | image.pullPolicy | string | `"Always"` |  |
 | image.repository | string | `"ghcr.io/nce/kubewreck-app"` |  |
 | image.tag | string | `"v1"` |  |
@@ -53,9 +53,8 @@ A Helm chart for Kubernetes
 | resources.requests.cpu | string | `"20m"` |  |
 | resources.requests.memory | string | `"32Mi"` |  |
 | securityContext | object | `{}` |  |
-| service.nodePort | int | `32000` |  |
 | service.port | int | `8080` |  |
-| service.type | string | `"NodePort"` |  |
+| service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.automount | bool | `true` |  |
 | serviceAccount.create | bool | `true` |  |
