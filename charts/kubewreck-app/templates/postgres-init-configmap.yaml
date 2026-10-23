@@ -1,0 +1,17 @@
+{{- if .Values.postgresInit.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "kubewreck.fullname" . }}-postgres-init
+  labels:
+    {{- include "kubewreck.labels" . | nindent 4 }}
+data:
+  init.sql: |
+    CREATE TABLE IF NOT EXISTS teams (
+        id integer PRIMARY KEY CHECK (id = 1),
+        name text NOT NULL CHECK (length(trim(name)) > 0)
+    );
+
+    INSERT INTO teams (id, name) VALUES (1, 'opdt')
+    ON CONFLICT (id) DO NOTHING;
+{{- end }}

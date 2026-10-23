@@ -139,18 +139,25 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+postgresInit:
+  # -- Create the ConfigMap containing the PostgreSQL initialization SQL.
+  enabled: true
 
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+env:
+  - name: POSTGRES_SECRET_DIR
+    value: /etc/postgres
+
+# Volumes on the output Deployment definition.
+volumes:
+  - name: postgres-password
+    secret:
+      secretName: postgres
+
+# Volume mounts on the output Deployment definition.
+volumeMounts:
+  - name: postgres-password
+    mountPath: /etc/postgres
+    readOnly: true
 
 nodeSelector: {}
 
