@@ -47,6 +47,28 @@ entries:
   kubewreck-app:
   - apiVersion: v2
     appVersion: v1
+    created: "2026-10-23T11:21:46.282953799Z"
+    description: A Helm chart for Kubernetes
+    digest: ff10c89535ca5bb88f5dfc0fefcd61b203346c0f543b3d2000f836747e013867
+    home: https://github.com/nce/kubewreck-app
+    keywords:
+    - go
+    - broken-kubernetes
+    - challenge
+    - kubewreck-app
+    maintainers:
+    - email: 770135+nce@users.noreply.github.com
+      name: nce
+      url: https://github.com/nce
+    name: kubewreck-app
+    sources:
+    - https://github.com/nce/kubewreck-app
+    type: application
+    urls:
+    - https://github.com/nce/helm-charts/releases/download/kubewreck-app-0.1.8/kubewreck-app-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: v1
     created: "2026-09-23T12:44:50.822675964Z"
     description: A Helm chart for Kubernetes
     digest: 8064816779e6d1c91a1b88d1a27a95823c2bc53385e577f6ba95a24d56bae602
@@ -181,4 +203,4 @@ entries:
     urls:
     - https://github.com/nce/helm-charts/releases/download/portscan-exporter-0.1.0/portscan-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2026-09-23T12:44:50.822696422Z"
+generated: "2026-10-23T11:21:46.282981691Z"
